@@ -1,4 +1,7 @@
-<div class="container">
+<div class="container" id="cardsViewContainer">
+
+  <button ng-click="vm.deleteCard()" class="deleteCardButton">Delete Card</button>
+  <button ng-click="vm.editCard()" class="editCardButton">Edit Card</button>
 
   <table class="table table-hover">
     <thead>
@@ -10,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="card in vm.data" ng-click='vm.showCard(card.id)'>
+      <tr ng-repeat="card in vm.data" ng-click='vm.processCard(card.id)'>
           <td><img ng-src="{{vm.cardImage(card.brand)}}" class="brandImage" /> </td>
           <td>{{card.name}}</td>
           <td>{{card.brand}}</td>

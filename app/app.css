@@ -54,3 +54,7 @@
 .resultMsg{
   text-align: center;
 }
+
+.deleteCardButton.ng-scope{
+  margin-right: 4px;
+}
