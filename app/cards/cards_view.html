@@ -3,7 +3,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Card id</th>
+        <th></th>
         <th>Name</th>
         <th>Brand</th>
         <th>Number</th>
@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr ng-repeat="card in vm.data" ng-click='vm.showCard(card.id)'>
-          <td>{{card.id}}</td>
+          <td><img ng-src="{{vm.cardImage(card.brand)}}" class="brandImage" /> </td>
           <td>{{card.name}}</td>
           <td>{{card.brand}}</td>
           <td>{{card.number}}</td>

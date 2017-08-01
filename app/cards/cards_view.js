@@ -28,6 +28,16 @@ angular.module('myApp.cards', ['ngRoute'])
             $location.path('/cards/' + cardID);
         }
 
+        vm.cardImage= function(brand) {
+            if(brand == 'visa') {
+                return config.visa_image;
+            }
+            else {
+                return config.mastercard_image;
+            }
+        }
+
+
         vm.sendGet();
 
     }]);

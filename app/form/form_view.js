@@ -4,7 +4,7 @@ angular.module('myApp.form', ['ngRoute'])
 
 
 
-    .controller('FormCtrl', ["$http", "config", function ($http, config) {
+    .controller('FormCtrl', ["$location","$http", "config", function ($location,$http, config) {
         var vm = this;
 
         vm.sendPost = function (number,brand,exp_year,exp_month,limit,name) {
@@ -25,14 +25,16 @@ angular.module('myApp.form', ['ngRoute'])
                 }
             }).then(function (response) {
                 vm.data = response.data;
-                vm.dataView = JSON.stringify(vm.data, null, "\t");
+                $location.path('/success');
             }, function (response) {
                 vm.data = response.data || 'Request failed';
+                $location.path('/error');
             });
         }
 
         vm.submitCard=function() {
   
+          try{
             var name=vm.cardholder_name;
             var number=vm.card_number;
             var brand=vm.brand;
@@ -41,6 +43,11 @@ angular.module('myApp.form', ['ngRoute'])
             var limit=vm.card_limit;
 
             vm.sendPost(number,brand,exp_year,exp_month,limit,name);
+            }
+            catch(err){
+                $location.path('/error');
+            }
+
         }
 
 

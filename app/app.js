@@ -28,13 +28,20 @@ angular.module('myApp', [
                 templateUrl: 'card_detailed/detailed_view.html',
                 controller: 'CardDetailedCtrl',
                 controllerAs: 'vm'
+            })
+            .when('/success', {
+                templateUrl: 'success/success.html',
+            })           
+            .when('/error', {
+                templateUrl: 'error/error.html',
             });
-
 
         $routeProvider.otherwise({redirectTo: '/cards'});
 
     }])
 
     .constant('config', {
-        "URL": "http://estagio.zagu.com.br/"
+        "URL": "http://estagio.zagu.com.br/",
+        "mastercard_image": "/images/mastercard.png",
+        "visa_image": "/images/visa.png" 
     });
