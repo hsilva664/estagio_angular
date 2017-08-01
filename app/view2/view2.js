@@ -11,7 +11,7 @@ angular.module('myApp.view2', ['ngRoute'])
                 url: config.URL + "cards",
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': 'Bearer seuToken'
+                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
                 },
                 data: {
                         "number": "1111 1111 1111 1111",

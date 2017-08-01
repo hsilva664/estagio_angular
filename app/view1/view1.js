@@ -12,7 +12,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 method: "GET",
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': 'Bearer seuToken'
+                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
                 },
                 url: config.URL + "cards",
             }).then(function (response) {
