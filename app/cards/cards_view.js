@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('myApp.view1', ['ngRoute'])
+angular.module('myApp.cards', ['ngRoute'])
 
 
 
-    .controller('View1Ctrl', ["$http", "config", function ($http, config) {
+    .controller('CardsCtrl', ["$location","$http", "config", function ($location, $http, config) {
         var vm = this;
 
         vm.sendGet = function () {
@@ -23,5 +23,11 @@ angular.module('myApp.view1', ['ngRoute'])
 
             });
         }
+
+        vm.showCard= function(cardID) {
+            $location.path('/cards/' + cardID);
+        }
+
+        vm.sendGet();
 
     }]);

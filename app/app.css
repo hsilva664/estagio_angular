@@ -23,3 +23,15 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+.table td{
+  text-align: center;
+}
+
+.table th{
+  text-align: center;
+}
+
+[ng-click] {
+  cursor: pointer;
+}

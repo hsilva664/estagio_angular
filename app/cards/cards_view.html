@@ -1,0 +1,23 @@
+<div class="container">
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Card id</th>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="card in vm.data" ng-click='vm.showCard(card.id)'>
+          <td>{{card.id}}</td>
+          <td>{{card.name}}</td>
+          <td>{{card.brand}}</td>
+          <td>{{card.number}}</td>
+      </tr>
+    </tbody>
+  </table>
+   
+
+</div>
