@@ -1,6 +1,60 @@
 <div class="container">
 
-    <p>This is the page for {{vm.cardId}}</p>
+
+  <div id='cardDetailsDiv'>
+        <img ng-src="{{vm.cardImage(vm.brand)}}" class="detailedBrandImage" />
+
+        <ul class="cardDetails">
+          <li> 
+            <dl>
+              <dt>Card Number</dt>
+              <dd>{{vm.number}}</dd>
+              <dt>Cardholder Name</dt>
+              <dd>{{vm.name}}</dd>                
+            </dl>
+          </li>
+          <li> 
+            <dl>
+              <dt>Expiration Month</dt>
+              <dd>{{vm.exp_month}}</dd>
+              <dt>Expiration Year</dt>
+              <dd>{{vm.exp_year}}</dd>
+            </dl>
+          </li>
+          <li> 
+            <dl>
+              <dt>Card Limit</dt>
+              <dd>{{vm.limit}}</dd>
+              <dt>Available Limit</dt>
+              <dd>{{vm.available_limit}}</dd>
+            </dl>
+          </li>          
+        </ul>
+  </div>
+
+  <div id='cardDetailsButtonDiv'>
+    <button class='paymentButton' ng-click="vm.addPayment()">Add payment</button>
+    <button class='paymentButton' ng-click="vm.editPayment()">Edit payment</button>
+    <button class='paymentButton' ng-click="vm.deletePayment()">Delete payment</button>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="payment in vm.payments" ng-attr-id="{{'table_payment_'+payment.id}}" ng-click='vm.processPayment(payment.id)'>
+            <td ng-attr-id="{{'table_payment_'+payment.id+'_date'}}">{{payment.date}}</td>
+            <td ng-attr-id="{{'table_payment_'+payment.id+'_amount'}}"> {{payment.amount}}</td>
+            <td ng-attr-id="{{'table_payment_'+payment.id+'_status'}}">{{payment.status}}</td>
+        </tr>
+      </tbody>
+    </table>  
+      
+  </div>
 
 
 </div>

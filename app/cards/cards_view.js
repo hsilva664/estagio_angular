@@ -70,7 +70,7 @@ angular.module('myApp.cards', ['ngRoute'])
         var removeCancelButton= function() {
             var container=document.getElementById('cardsViewContainer');
             var cancel_button_list=document.getElementsByClassName('cancelCardButton');         
-            for(var i=0;i<cancel_button_list.length;i++) {
+            for(var i=0;i<cancel_button_list.length;i=0) {
                 container.removeChild(cancel_button_list[i]);
             }
         }
@@ -100,10 +100,10 @@ angular.module('myApp.cards', ['ngRoute'])
             var container=document.getElementById('cardsViewContainer');
             var delete_button_list=document.getElementsByClassName('deleteCardButton');
             var edit_button_list=document.getElementsByClassName('editCardButton');            
-            for(var i=0;i<delete_button_list.length;i++) {
+            for(var i=0;i<delete_button_list.length;i=0) {
                 container.removeChild(delete_button_list[i]);
             }
-            for(var i=0;i<edit_button_list.length;i++) {
+            for(var i=0;i<edit_button_list.length;i=0) {
                 container.removeChild(edit_button_list[i]);
             }
         }

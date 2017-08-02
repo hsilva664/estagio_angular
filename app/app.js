@@ -8,6 +8,8 @@ angular.module('myApp', [
     'myApp.cardDetailed',
     'myApp.form',
     'myApp.edit',
+    'myApp.addPayment',
+   'myApp.editPayment',
     'ui.bootstrap'
 ])
 
@@ -30,6 +32,16 @@ angular.module('myApp', [
                 controller: 'CardDetailedCtrl',
                 controllerAs: 'vm'
             })
+            .when('/payments/add/:cardId', {
+                templateUrl: 'add_payment/add_payment.html',
+                controller: 'AddPaymentCtrl',
+                controllerAs: 'vm'
+            })
+            .when('/payments/edit/:cardId/:paymentId', {
+                templateUrl: 'edit_payment/edit_payment.html',
+                controller: 'EditPaymentCtrl',
+                controllerAs: 'vm'
+            })                     
             .when('/edit/:cardId', {
                 templateUrl: 'edit/edit_view.html',
                 controller: 'EditCtrl',

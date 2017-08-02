@@ -43,6 +43,33 @@
 
 }
 
+.detailedBrandImage {
+  width: 300px;
+  float: left;
+}
+
+
+.cardDetails {
+  display: inline;
+  list-style: none;
+}
+
+.cardDetails > li{
+  float: left;
+  padding-left: 20px;
+}
+
+#cardDetailsDiv{
+  clear: both;
+}
+
+#cardDetailsButtonDiv{
+  clear: both;
+  position: relative;
+  padding-left: 10px;
+  padding-top: 10px;
+}
+
 .resultFigure {
   width: 200px;
 }
@@ -56,5 +83,13 @@
 }
 
 .deleteCardButton.ng-scope{
+  margin-right: 4px;
+}
+
+.paymentButton {
+  font-size: 12px;
+}
+
+.paymentButton.ng-scope{
   margin-right: 4px;
 }
