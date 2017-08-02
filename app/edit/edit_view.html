@@ -1,0 +1,47 @@
+<div class="container">
+
+  <div class="form-group">
+    <label for="usr">Name:</label>
+    <input type="text" class="form-control" id="usr" ng-model='vm.cardholder_name'>
+  </div>
+
+  <div class="form-group">
+    <label for="card_no">Card Number:</label>
+    <input type="number" class="form-control" id="card_no" ng-model='vm.card_number'>
+  </div>
+
+  <label>
+    Brand:
+  </label>
+
+  <br />
+
+
+  <div ng-init="vm.brand='visa'" />
+
+  <div class="radio-inline">
+    <label><input type="radio" name="optbrand" checked='checked' ng-model='vm.brand' value='visa'>Visa</label>    
+  </div>
+
+  <div class="radio-inline">
+    <label><input type="radio" name="optbrand" ng-model='vm.brand' value='mastercard'>Mastercard</label>
+  </div>  
+
+  <br />
+  <br />
+
+  <div class="form-group">
+    <label for="card_date">Expiration Date:</label>
+    <input type="month" class="form-control" id="card_date" ng-model='vm.card_date'>
+  </div>
+
+
+  <div class="form-group">
+    <label for="card_limit">Card Limit:</label>
+    <input type="number" class="form-control" id="card_limit" ng-model='vm.card_limit'>
+  </div>
+
+  <button ng-click="vm.submitCard()">Submit</button>
+  <button ng-click="vm.cancelEdit()">Cancel</button>
+
+</div>

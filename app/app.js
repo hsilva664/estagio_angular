@@ -7,6 +7,7 @@ angular.module('myApp', [
     'myApp.cards',
     'myApp.cardDetailed',
     'myApp.form',
+    'myApp.edit',
     'ui.bootstrap'
 ])
 
@@ -29,6 +30,11 @@ angular.module('myApp', [
                 controller: 'CardDetailedCtrl',
                 controllerAs: 'vm'
             })
+            .when('/edit/:cardId', {
+                templateUrl: 'edit/edit_view.html',
+                controller: 'EditCtrl',
+                controllerAs: 'vm'                
+            })            
             .when('/success', {
                 templateUrl: 'success/success.html',
             })           

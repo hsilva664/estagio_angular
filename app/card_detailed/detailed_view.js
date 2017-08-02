@@ -5,7 +5,7 @@ angular.module('myApp.cardDetailed', ['ngRoute'])
     .controller('CardDetailedCtrl', ["$http", "config","$routeParams", function ($http, config, $routeParams) {
         var vm = this;
 
-        vm.cardId=$routeParams.cardId
+        vm.cardId=$routeParams.cardId;
 
         // vm.sendPost = function () {
         //     $http({

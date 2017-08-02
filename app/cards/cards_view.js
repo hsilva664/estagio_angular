@@ -53,35 +53,7 @@ angular.module('myApp.cards', ['ngRoute'])
                 vm.process='redirect';                
             }
             else { //vm.process = 'edit'
-                //Access DOM elements
-                var edited_container=document.getElementById('table_entry_'+cardID);
-                var edited_name=document.getElementById('table_entry_'+cardID+'_name');
-                var edited_brand=document.getElementById('table_entry_'+cardID+'_brand');
-                var edited_number=document.getElementById('table_entry_'+cardID+'_number');
-                var edited_expiration=document.getElementById('table_entry_'+cardID+'_expiration');
-                var edited_limit=document.getElementById('table_entry_'+cardID+'_limit');
-
-                //Store old data
-                vm.old_name=edited_name.innerHTML;
-                vm.old_brand=edited_brand.innerHTML;
-                vm.old_number=edited_number.innerHTML;
-                var old_expiration=edited_expiration.innerHTML;
-                var split=old_expiration.split("/");
-                vm.old_month=split[0];
-                vm.old_year=split[1];
-                vm.old_limit=edited_limit.innerHTML;
-
-                //Store data for CANCEL
-                vm.editing_id=cardID;
-                vm.process='edit_ongoing';
-
-                //Dummy
-                edited_name.innerHTML=''
-                edited_brand.innerHTML=''
-                edited_number.innerHTML=''
-                edited_expiration.innerHTML=''
-                edited_limit.innerHTML=''
-                
+                $location.path('/edit/' + cardID);                
             }
         }
 
@@ -161,24 +133,6 @@ angular.module('myApp.cards', ['ngRoute'])
         }
 
         vm.cancelAction = function() {
-            if(vm.process=='edit_ongoing') {
-                var cardID= vm.editing_id;
-                //Access DOM elements
-                var edited_container=document.getElementById('table_entry_'+cardID);
-                var edited_name=document.getElementById('table_entry_'+cardID+'_name');
-                var edited_brand=document.getElementById('table_entry_'+cardID+'_brand');
-                var edited_number=document.getElementById('table_entry_'+cardID+'_number');
-                var edited_expiration=document.getElementById('table_entry_'+cardID+'_expiration');
-                var edited_limit=document.getElementById('table_entry_'+cardID+'_limit');
-
-                //Restore old data
-                edited_name.innerHTML=vm.old_name;
-                edited_brand.innerHTML=vm.old_brand;
-                edited_number.innerHTML=vm.old_number;
-                edited_expiration.innerHTML=vm.old_month+"/"+vm.old_year;
-                edited_limit.innerHTML=vm.old_limit;
-            }
-
             removeCancelButton();
             restoreDeleteEditButtons();
             vm.process='redirect';
