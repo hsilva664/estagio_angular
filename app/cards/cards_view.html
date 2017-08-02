@@ -10,14 +10,18 @@
         <th>Name</th>
         <th>Brand</th>
         <th>Number</th>
+        <th>Expiration Date</th>
+        <th>Limit</th>
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="card in vm.data" ng-click='vm.processCard(card.id)'>
+      <tr ng-repeat="card in vm.data" ng-attr-id="{{'table_entry_'+card.id}}" ng-click='vm.processCard(card.id)'>
           <td><img ng-src="{{vm.cardImage(card.brand)}}" class="brandImage" /> </td>
-          <td>{{card.name}}</td>
-          <td>{{card.brand}}</td>
-          <td>{{card.number}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_name'}}">{{card.name}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_brand'}}"> {{card.brand}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_number'}}">{{card.number}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_expiration'}}">{{card.exp_month+'/'+card.exp_year}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_limit'}}">{{card.limit}}</td>
       </tr>
     </tbody>
   </table>
