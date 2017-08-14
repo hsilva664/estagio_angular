@@ -4,11 +4,18 @@ angular.module('myApp.form', ['ngRoute'])
 
 
 
-    .controller('FormCtrl', ["$location",'cardsServicesRequests', "config", function ($location, config, cardsServicesRequests) {
+    .controller('FormCtrl', ["$location","$http", "config", function ($location,$http, config) {
         var vm = this;
 
         vm.sendPost = function (number,brand,exp_year,exp_month,limit,name) {
-                var data= {
+            $http({
+                method: "POST",
+                url: config.URL + "cards",
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
+                },
+                data: {
                         "number": number,
                         "brand": brand,
                         "exp_year": exp_year,
@@ -16,7 +23,7 @@ angular.module('myApp.form', ['ngRoute'])
                         "limit": limit,
                         "name": name
                 }
-            cardsServicesRequests.postCard(data).then(function (response) {
+            }).then(function (response) {
                 vm.data = response.data;
                 $location.path('/success');
             }, function (response) {

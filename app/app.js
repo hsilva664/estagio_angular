@@ -10,6 +10,7 @@ angular.module('myApp', [
     'myApp.edit',
     'myApp.addPayment',
    'myApp.editPayment',
+   'myApp.cardService',
     'ui.bootstrap'
 ])
 

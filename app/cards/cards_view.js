@@ -4,20 +4,13 @@ angular.module('myApp.cards', ['ngRoute'])
 
 
 
-    .controller('CardsCtrl', ["$scope","$compile","$location","$http", "config", function ($scope, $compile, $location, $http, config) {
+    .controller('CardsCtrl', ['cardsServicesRequests',"$scope","$compile","$location", "config", function (cardsServicesRequests,$scope, $compile, $location, config) {
         var vm = this;
 
         vm.process='redirect'
 
         vm.sendGet = function () {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "cards",
-            }).then(function (response) {
+            cardsServicesRequests.getCards().then(function (response) {
                 vm.data = response.data;
                 vm.dataView = JSON.stringify(vm.data, null, "\t");
             }, function (response) {
@@ -27,14 +20,7 @@ angular.module('myApp.cards', ['ngRoute'])
         }
 
         vm.sendDelete = function (card_id) {
-            $http({
-                method: "DELETE",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "cards/"+card_id,
-            }).then(function (response) {
+            cardsServicesRequests.deleteCard(card_id).then(function (response) {
                 vm.sendGet();               
             }, function (response) {
                 vm.sendGet();
