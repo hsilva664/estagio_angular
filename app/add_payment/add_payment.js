@@ -4,24 +4,17 @@ angular.module('myApp.addPayment', ['ngRoute'])
 
 
 
-    .controller('AddPaymentCtrl', ["$location","$http", "config", "$routeParams",function ($location,$http, config, $routeParams) {
+    .controller('AddPaymentCtrl', ['paymentServicesRequests',"$location","$http", "config", "$routeParams",function (paymentServicesRequests,$location,$http, config, $routeParams) {
         var vm = this;
 
         vm.cardId=$routeParams.cardId;
 
         vm.sendPost = function (cardId,amount) {
-            $http({
-                method: "POST",
-                url: config.URL + "payments",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                data: {
+                var data = {
                         "amount": amount,
                         "card_id": cardId
-                }
-            }).then(function (response) {
+                };
+            paymentServicesRequests.postPayment(data).then(function (response) {
                 vm.data = response.data;
                 $location.path('/cards/'+vm.cardId);
             }, function (response) {

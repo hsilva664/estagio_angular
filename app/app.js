@@ -11,6 +11,7 @@ angular.module('myApp', [
     'myApp.addPayment',
    'myApp.editPayment',
    'myApp.cardService',
+   'myApp.paymentService',
     'ui.bootstrap'
 ])
 

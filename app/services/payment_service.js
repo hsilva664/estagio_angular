@@ -1,54 +1,54 @@
 'use strict';
 
-angular.module('myApp.form', ['ngRoute'])
+var app=angular.module('myApp.paymentService', []);
 
+app.service('paymentServicesRequests', ["$http","config",function($http,config) {    
+    var payment = {};
+    var header = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
+    };
+    payment.getPayments = function (cardID){
+        return $http({
+            headers: header,
+            method: "GET",
+            url: config.URL + "cards/"+cardID+'/payments'
+        });
+    };
 
+    payment.getPayment = function (paymentID){
+        return $http({
+            headers: header,
+            method: "GET",
+            url: config.URL + "payments/"+paymentID
+        });
+    };
 
-    .controller('FormCtrl', ["$location","$http", "config", function ($location,$http, config) {
-        var vm = this;
+    payment.deletePayment = function (payment_id){
+        return $http({
+                method: "DELETE",
+                headers: header,
+                url: config.URL + "payments/"+payment_id,        
+        });
+    };
 
-        vm.sendPost = function (number,brand,exp_year,exp_month,limit,name) {
-            $http({
+    payment.postPayment = function (data){
+        return $http({
                 method: "POST",
-                url: config.URL + "cards",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                data: {
-                        "number": number,
-                        "brand": brand,
-                        "exp_year": exp_year,
-                        "exp_month":exp_month,
-                        "limit": limit,
-                        "name": name
-                }
-            }).then(function (response) {
-                vm.data = response.data;
-                $location.path('/success');
-            }, function (response) {
-                vm.data = response.data || 'Request failed';
-                $location.path('/error');
-            });
-        }
+                headers: header,
+                url: config.URL + "payments",
+                data: data
+        });
+    };
 
-        vm.submitCard=function() {
-  
-          try{
-            var name=vm.cardholder_name;
-            var number=vm.card_number;
-            var brand=vm.brand;
-            var exp_month=vm.card_date.getMonth();
-            var exp_year=vm.card_date.getFullYear();
-            var limit=vm.card_limit;
+    payment.patchPayment = function (paymentID,data){
+        return $http({
+            headers: header,
+            method: "PATCH",
+            data: data,
+            url: config.URL + "payments/"+paymentID
+        });
+    };    
 
-            vm.sendPost(number,brand,exp_year,exp_month,limit,name);
-            }
-            catch(err){
-                $location.path('/error');
-            }
-
-        }
-
-
-    }]);
+    return payment;
+}]);

@@ -2,20 +2,13 @@
 
 angular.module('myApp.cardDetailed', ['ngRoute'])
 
-    .controller('CardDetailedCtrl', ["$location","$scope","$compile","$http", "config","$routeParams", function ($location, $scope,$compile,$http, config, $routeParams) {
+    .controller('CardDetailedCtrl', ['paymentServicesRequests','cardsServicesRequests',"$location","$scope","$compile", "config","$routeParams", function (paymentServicesRequests,cardsServicesRequests,$location, $scope,$compile, config, $routeParams) {
         var vm = this;
 
         vm.cardId=$routeParams.cardId;
 
         vm.sendGetCard = function (cardID) {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "cards/"+cardID,
-            }).then(function (response) {
+            cardsServicesRequests.getCard(cardID).then(function (response) {
                 vm.initialData=response.data;
                 vm.name=vm.initialData.name;
                 vm.number=vm.initialData.number;
@@ -35,14 +28,7 @@ angular.module('myApp.cardDetailed', ['ngRoute'])
         vm.sendGetCard(vm.cardId);
 
         vm.sendGetPayments = function (cardID) {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "cards/"+cardID+'/payments',
-            }).then(function (response) {
+            paymentServicesRequests.getPayments(cardID).then(function (response) {
                 vm.payments=response.data;
             }, function (response) {
                 vm.payments = response.data || 'Request failed';
@@ -50,14 +36,7 @@ angular.module('myApp.cardDetailed', ['ngRoute'])
         }
 
         vm.sendDeletePayment = function (payment_id) {
-            $http({
-                method: "DELETE",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "payments/"+payment_id,
-            }).then(function (response) {
+            paymentServicesRequests.deletePayment(payment_id).then(function (response) {
                 vm.sendGetCard(vm.cardId);
                 vm.sendGetPayments(vm.cardId);               
             }, function (response) {

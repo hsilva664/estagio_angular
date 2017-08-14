@@ -3,18 +3,11 @@
 angular.module('myApp.editPayment', ['ngRoute'])
 
 
-    .controller('EditPaymentCtrl', ["$location","$http", "config","$routeParams", function ($location,$http, config,$routeParams) {
+    .controller('EditPaymentCtrl', ['paymentServicesRequests',"$location", "config","$routeParams", function (paymentServicesRequests,$location, config,$routeParams) {
         var vm = this;
 
         vm.sendGet = function (paymentID) {
-            $http({
-                method: "GET",
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                url: config.URL + "payments/"+paymentID,
-            }).then(function (response) {                                
+            paymentServicesRequests.getPayment(paymentID).then(function (response) {                                
                 vm.amount= response.data.amount;
                 vm.status= response.data.status;
 
@@ -29,18 +22,11 @@ angular.module('myApp.editPayment', ['ngRoute'])
 
 
         vm.sendPatch = function (id,amount,status) {
-            $http({
-                method: "PATCH",
-                url: config.URL + "payments/"+id,
-                headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
-                },
-                data: {
+                var data = {
                         "amount": amount,
                         "status": status
-                }
-            }).then(function (response) {
+                };
+            paymentServicesRequests.patchPayment(id,data).then(function (response) {
                 vm.data = response.data;
                 $location.path('/cards/'+vm.cardId);
             }, function (response) {
