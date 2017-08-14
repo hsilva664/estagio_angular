@@ -2,11 +2,11 @@
 
 var app=angular.module('myApp.cardService', []);
 
-app.service('cardsServicesRequests', ["$http","config",function($http,config) {    
+app.service('cardsServicesRequests', ["$http","config",'$window',function($http,config,$window) {    
     var card = {};
     var header = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
+        'Authorization': 'Bearer ' + window.localStorage.getItem('key')
     };
     card.getCards = function (){
         return $http({

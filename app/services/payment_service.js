@@ -2,11 +2,11 @@
 
 var app=angular.module('myApp.paymentService', []);
 
-app.service('paymentServicesRequests', ["$http","config",function($http,config) {    
+app.service('paymentServicesRequests', ["$http","config","$window",function($http,config,$window) {    
     var payment = {};
     var header = {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 48c8e8b1e97049bdca9eae769d5b8b4c'
+        'Authorization': 'Bearer ' + window.localStorage.getItem('key')
     };
     payment.getPayments = function (cardID){
         return $http({

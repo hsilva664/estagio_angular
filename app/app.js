@@ -1,5 +1,6 @@
 'use strict';
 
+window.localStorage.setItem('key', '48c8e8b1e97049bdca9eae769d5b8b4c');
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
