@@ -26,7 +26,7 @@ angular.module('myApp.addPayment', ['ngRoute'])
         vm.submitPayment=function() {
   
           try{
-            vm.sendPost(vm.cardId,vm.amount);
+            vm.sendPost(vm.cardId,vm.amount*100);
             }
             catch(err){
                 $location.path('/error');

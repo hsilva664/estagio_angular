@@ -8,7 +8,7 @@ angular.module('myApp.editPayment', ['ngRoute'])
 
         vm.sendGet = function (paymentID) {
             paymentServicesRequests.getPayment(paymentID).then(function (response) {                                
-                vm.amount= response.data.amount;
+                vm.amount= response.data.amount/100;
                 vm.status= response.data.status;
 
             }, function (response) {
@@ -39,7 +39,7 @@ angular.module('myApp.editPayment', ['ngRoute'])
   
           try{
  
-            vm.sendPatch(vm.paymentId,vm.amount,vm.status);
+            vm.sendPatch(vm.paymentId,(vm.amount*100),vm.status);
             }
             catch(err){
                 $location.path('/error');

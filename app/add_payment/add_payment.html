@@ -2,7 +2,7 @@
 
   <div class="form-group">
     <label for="card_limit">Amount:</label>
-    <input type="number" class="form-control" id="payment_amount" ng-model='vm.amount'>
+    <input type="text" class="form-control" id="payment_amount" ng-model='vm.amount' ui-money-mask>
   </div>
 
   <button ng-click="vm.submitPayment()">Submit</button>

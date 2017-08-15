@@ -19,9 +19,9 @@
           <td><img ng-src="{{vm.cardImage(card.brand)}}" class="brandImage" /> </td>
           <td ng-attr-id="{{'table_entry_'+card.id+'_name'}}">{{card.name}}</td>
           <td ng-attr-id="{{'table_entry_'+card.id+'_brand'}}"> {{card.brand}}</td>
-          <td ng-attr-id="{{'table_entry_'+card.id+'_number'}}">{{card.number}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_number'}}">{{card.number|cardNumber}}</td>
           <td ng-attr-id="{{'table_entry_'+card.id+'_expiration'}}">{{card.exp_month+'/'+card.exp_year}}</td>
-          <td ng-attr-id="{{'table_entry_'+card.id+'_limit'}}">{{card.limit}}</td>
+          <td ng-attr-id="{{'table_entry_'+card.id+'_limit'}}">{{card.limit/100|currency}}</td>
       </tr>
     </tbody>
   </table>

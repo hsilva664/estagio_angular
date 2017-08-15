@@ -8,7 +8,7 @@
           <li> 
             <dl>
               <dt>Card Number</dt>
-              <dd>{{vm.number}}</dd>
+              <dd>{{vm.number|cardNumber}}</dd>
               <dt>Cardholder Name</dt>
               <dd>{{vm.name}}</dd>                
             </dl>
@@ -24,9 +24,9 @@
           <li> 
             <dl>
               <dt>Card Limit</dt>
-              <dd>{{vm.limit}}</dd>
+              <dd>{{vm.limit/100|currency}}</dd>
               <dt>Available Limit</dt>
-              <dd>{{vm.available_limit}}</dd>
+              <dd>{{vm.available_limit/100|currency}}</dd>
             </dl>
           </li>          
         </ul>
@@ -48,7 +48,7 @@
       <tbody>
         <tr ng-repeat="payment in vm.payments" ng-attr-id="{{'table_payment_'+payment.id}}" ng-click='vm.processPayment(payment.id)'>
             <td ng-attr-id="{{'table_payment_'+payment.id+'_date'}}">{{payment.date}}</td>
-            <td ng-attr-id="{{'table_payment_'+payment.id+'_amount'}}"> {{payment.amount}}</td>
+            <td ng-attr-id="{{'table_payment_'+payment.id+'_amount'}}"> {{payment.amount/100|currency}}</td>
             <td ng-attr-id="{{'table_payment_'+payment.id+'_status'}}">{{payment.status}}</td>
         </tr>
       </tbody>

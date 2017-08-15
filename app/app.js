@@ -2,8 +2,9 @@
 
 window.localStorage.setItem('key', '48c8e8b1e97049bdca9eae769d5b8b4c');
 
+
 // Declare app level module which depends on views, and components
-angular.module('myApp', [
+var module = angular.module('myApp', [
     'ngRoute',
     'myApp.cards',
     'myApp.cardDetailed',
@@ -13,7 +14,9 @@ angular.module('myApp', [
    'myApp.editPayment',
    'myApp.cardService',
    'myApp.paymentService',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'ui.mask',
+    'ui.utils.masks'
 ])
 
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
@@ -66,3 +69,19 @@ angular.module('myApp', [
         "mastercard_image": "/images/mastercard.png",
         "visa_image": "/images/visa.png" 
     });
+
+  module.filter('cardNumber', function() {
+    return function(input) {
+        if(typeof(input)!='string') {
+            input=input.toString();
+        }
+        var output="";
+        for(var i=0;i<input.length;i++) {
+            if(i%4==0 && i>0) {
+                output+=" ";
+            }
+            output+=input[i];
+        }
+      return output;
+    };
+  });

@@ -7,7 +7,7 @@
 
   <div class="form-group">
     <label for="card_no">Card Number:</label>
-    <input type="number" class="form-control" id="card_no" ng-model='vm.card_number'>
+    <input type="text" class="form-control" id="card_no" ng-model='vm.card_number' ui-mask="9999 9999 9999 9999">
   </div>
 
   <label>
@@ -38,7 +38,7 @@
 
   <div class="form-group">
     <label for="card_limit">Card Limit:</label>
-    <input type="number" class="form-control" id="card_limit" ng-model='vm.card_limit'>
+    <input type="text" class="form-control" id="card_limit" ng-model='vm.card_limit' ui-money-mask>
   </div>
 
   <button ng-click="vm.submitCard()">Submit</button>

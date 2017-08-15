@@ -4,7 +4,7 @@ angular.module('myApp.form', ['ngRoute'])
 
 
 
-    .controller('FormCtrl', ["$location",'cardsServicesRequests', "config", function ($location, config, cardsServicesRequests) {
+    .controller('FormCtrl', ["$location", "config", 'cardsServicesRequests', function ($location, config, cardsServicesRequests) {
         var vm = this;
 
         vm.sendPost = function (number,brand,exp_year,exp_month,limit,name) {
@@ -31,13 +31,13 @@ angular.module('myApp.form', ['ngRoute'])
             var name=vm.cardholder_name;
             var number=vm.card_number;
             var brand=vm.brand;
-            var exp_month=vm.card_date.getMonth();
+            var exp_month=vm.card_date.getMonth()+1;
             var exp_year=vm.card_date.getFullYear();
-            var limit=vm.card_limit;
+            var limit=vm.card_limit*100;
 
             vm.sendPost(number,brand,exp_year,exp_month,limit,name);
             }
-            catch(err){
+            catch(err){                
                 $location.path('/error');
             }
 

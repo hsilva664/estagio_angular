@@ -20,7 +20,7 @@ angular.module('myApp.edit', ['ngRoute'])
                 vm.card_date.setMonth(temp.toString());
                 vm.card_date.setFullYear(vm.initialData.exp_year);
 
-                vm.card_limit=vm.initialData.limit;
+                vm.card_limit=vm.initialData.limit/100;
 
             }, function (response) {
                 vm.data = response.data || 'Request failed';
@@ -57,7 +57,7 @@ angular.module('myApp.edit', ['ngRoute'])
             var brand=vm.brand;
             var exp_month=vm.card_date.getMonth()+1;
             var exp_year=vm.card_date.getFullYear();
-            var limit=vm.card_limit;
+            var limit=vm.card_limit*100;
 
             vm.sendPatch(vm.cardId,number,brand,exp_year,exp_month,limit,name);
             }
