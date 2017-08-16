@@ -1,13 +1,17 @@
 <div class="container">
 
+<zagu-estagio-error-directive info="vm.errors">
+
+</zagu-estagio-error-directive>
+
   <div class="form-group">
     <label for="usr">Name:</label>
-    <input type="text" class="form-control" id="usr" ng-model='vm.cardholder_name'>
+    <input type="text" class="form-control" id="usr" ng-model='vm.card.name'>
   </div>
 
   <div class="form-group">
     <label for="card_no">Card Number:</label>
-    <input type="text" class="form-control" id="card_no"  ng-model='vm.card_number'  ui-mask="9999 9999 9999 9999">
+    <input type="text" class="form-control" id="card_no"  ng-model='vm.card.number'  ui-mask="9999 9999 9999 9999">
   </div>
 
   <label>
@@ -20,11 +24,11 @@
   <div ng-init="vm.brand='visa'" />
 
   <div class="radio-inline">
-    <label><input type="radio" name="optbrand" checked='checked' ng-model='vm.brand' value='visa'>Visa</label>    
+    <label><input type="radio" name="optbrand" checked='checked' ng-model='vm.card.brand' value='visa'>Visa</label>    
   </div>
 
   <div class="radio-inline">
-    <label><input type="radio" name="optbrand" ng-model='vm.brand' value='mastercard'>Mastercard</label>
+    <label><input type="radio" name="optbrand" ng-model='vm.card.brand' value='mastercard'>Mastercard</label>
   </div>  
 
   <br />

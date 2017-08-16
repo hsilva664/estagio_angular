@@ -7,59 +7,45 @@ angular.module('myApp.edit', ['ngRoute'])
     .controller('EditCtrl', ['cardsServicesRequests',"$location", "config","$routeParams", function (cardsServicesRequests,$location, config,$routeParams) {
         var vm = this;
 
+        vm.card={}
+        vm.errors={}
+
         vm.sendGet = function (cardID) {
             cardsServicesRequests.getCard(cardID).then(function (response) {
-                vm.initialData=response.data;
-                vm.cardholder_name=vm.initialData.name;
-                vm.card_number=parseInt(vm.initialData.number);
-                vm.brand=vm.initialData.brand
-
+                vm.card = response.data;
                 vm.card_date=new Date();
-                var temp=parseInt(vm.initialData.exp_month);
-                temp=temp-1;
-                vm.card_date.setMonth(temp.toString());
-                vm.card_date.setFullYear(vm.initialData.exp_year);
+                var t=parseInt(vm.card.exp_month)-1;                
+                vm.card_date.setMonth(t.toString());
+                vm.card_date.setFullYear(vm.card.exp_year);
 
-                vm.card_limit=vm.initialData.limit/100;
+                vm.card_limit=(vm.card.limit)/100;
 
             }, function (response) {
                 vm.data = response.data || 'Request failed';
             });
         }
 
-        vm.cardId=$routeParams.cardId;
+        vm.cardId = $routeParams.cardId;
         vm.sendGet(vm.cardId);        
 
 
-        vm.sendPatch = function (id,number,brand,exp_year,exp_month,limit,name) {
-                var data= {
-                        "number": number,
-                        "brand": brand,
-                        "exp_year": exp_year,
-                        "exp_month":exp_month,
-                        "limit": limit,
-                        "name": name
-                };
-            cardsServicesRequests.patchCard(id,data).then(function (response) {
+        vm.sendPatch = function () {
+            cardsServicesRequests.patchCard(vm.cardId,vm.card).then(function (response) {
                 vm.data = response.data;
                 $location.path('/success');
             }, function (response) {
-                vm.data = response.data || 'Request failed';
-                $location.path('/error');
+                vm.errors=response.data.errors;
             });
         }
 
         vm.submitCard=function() {
   
           try{
-            var name=vm.cardholder_name;
-            var number=vm.card_number;
-            var brand=vm.brand;
-            var exp_month=vm.card_date.getMonth()+1;
-            var exp_year=vm.card_date.getFullYear();
-            var limit=vm.card_limit*100;
+            vm.card.exp_month=vm.card_date.getMonth()+1;
+            vm.card.exp_year=vm.card_date.getFullYear();
+            vm.card.limit=vm.card_limit*100;
 
-            vm.sendPatch(vm.cardId,number,brand,exp_year,exp_month,limit,name);
+            vm.sendPatch();
             }
             catch(err){
                 $location.path('/error');

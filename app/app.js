@@ -85,3 +85,62 @@ var module = angular.module('myApp', [
       return output;
     };
   });
+
+  module.filter('errorName', function() {
+    return function(input) {
+        var output;
+        if(input=='name') {
+            output='Name field error';
+         }
+        else if(input=='number') {
+            output='Card number error';
+         }
+        else if(input=='exp_month') {
+            output='Expiratory month error';
+        }
+        else if(input=='exp_year') {
+            output='Expiratory year error';
+        }
+        else if(input=='limit') {
+            output='Card limit error';
+        }        
+        else {
+             output=input;   
+        }        
+      return output;
+    };
+  });
+
+  module.filter('errorDescription', function() {
+    return function(input) {
+        var output;
+        if(input=='missing_field') {
+            output='Missing field';
+         }
+        else if(input=='invalid_expiry_year') {
+            output='Invalid expiratory year';
+         }
+        else if(input=='invalid_expiry_month') {
+            output='Invalid expiratory month';
+        }
+        else {
+             output=input;   
+        }        
+      return output;
+    };
+  });  
+
+  module.directive('zaguEstagioErrorDirective', zaguEstagioErrorDirective);
+
+zaguEstagioErrorDirective.$inject = [];
+function zaguEstagioErrorDirective() {
+        var directive = {
+
+            restrict: 'E',
+            scope: {
+                errorInfo: '=info'
+            },
+            templateUrl: 'error/error-msg.html'
+        };
+        return directive;
+    }

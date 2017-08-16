@@ -1,0 +1,3 @@
+<div class="alert alert-danger" ng-repeat="(error_name,error_description) in errorInfo">
+  <strong>Danger!</strong> {{(error_name|errorName) +": " + (error_description|errorDescription)}}
+</div>

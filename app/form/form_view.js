@@ -7,37 +7,41 @@ angular.module('myApp.form', ['ngRoute'])
     .controller('FormCtrl', ["$location", "config", 'cardsServicesRequests', function ($location, config, cardsServicesRequests) {
         var vm = this;
 
-        vm.sendPost = function (number,brand,exp_year,exp_month,limit,name) {
-                var data= {
-                        "number": number,
-                        "brand": brand,
-                        "exp_year": exp_year,
-                        "exp_month":exp_month,
-                        "limit": limit,
-                        "name": name
-                }
-            cardsServicesRequests.postCard(data).then(function (response) {
+        vm.errors={};
+
+        vm.card = {};
+
+        vm.sendPost = function () {
+            cardsServicesRequests.postCard(vm.card).then(function (response) {
                 vm.data = response.data;
                 $location.path('/success');
             }, function (response) {
-                vm.data = response.data || 'Request failed';
-                $location.path('/error');
+                vm.errors = response.data.errors;
             });
         }
 
         vm.submitCard=function() {
   
           try{
-            var name=vm.cardholder_name;
-            var number=vm.card_number;
-            var brand=vm.brand;
-            var exp_month=vm.card_date.getMonth()+1;
-            var exp_year=vm.card_date.getFullYear();
-            var limit=vm.card_limit*100;
-
-            vm.sendPost(number,brand,exp_year,exp_month,limit,name);
+            if(vm.card_date) {
+                vm.card.exp_month=vm.card_date.getMonth()+1;
+                vm.card.exp_year=vm.card_date.getFullYear();
             }
-            catch(err){                
+            else {
+                vm.card.exp_month=null;
+                vm.card.exp_year=null;
+            }
+
+            if(vm.card_limit) {
+                vm.card.limit=vm.card_limit*100;
+            }
+            else {
+                vm.card.limit=null;
+            }
+
+            vm.sendPost();
+            }
+            catch(err){
                 $location.path('/error');
             }
 
