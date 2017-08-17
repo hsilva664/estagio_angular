@@ -6,19 +6,16 @@ angular.module('myApp.addPayment', ['ngRoute'])
 
     .controller('AddPaymentCtrl', ['paymentServicesRequests',"$location","$http", "config", "$routeParams",function (paymentServicesRequests,$location,$http, config, $routeParams) {
         var vm = this;
+        vm.payment={};
 
-        vm.cardId=$routeParams.cardId;
+        vm.payment.card_id=$routeParams.cardId;
 
-        vm.sendPost = function (cardId,amount) {
-                var data = {
-                        "amount": amount,
-                        "card_id": cardId
-                };
-            paymentServicesRequests.postPayment(data).then(function (response) {
+        vm.sendPost = function () {
+            paymentServicesRequests.postPayment(vm.payment).then(function (response) {
                 vm.data = response.data;
-                $location.path('/cards/'+vm.cardId);
-            }, function (response) {
-                vm.data = response.data || 'Request failed';
+                $location.path('/cards/'+vm.payment.card_id);
+            }, function (response) {  
+                //vm.errors = response.data.errors;
                 $location.path('/error');
             });
         }
@@ -26,7 +23,14 @@ angular.module('myApp.addPayment', ['ngRoute'])
         vm.submitPayment=function() {
   
           try{
-            vm.sendPost(vm.cardId,vm.amount*100);
+
+            if(vm.payment_amount!='undefined') {
+                vm.payment.amount=100*vm.payment_amount;
+            }
+            else {
+                vm.payment.amount=null;
+            }
+            vm.sendPost();
             }
             catch(err){
                 $location.path('/error');

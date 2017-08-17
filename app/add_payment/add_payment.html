@@ -1,8 +1,12 @@
 <div class="container">
 
+<zagu-estagio-error-directive info="vm.errors">
+
+</zagu-estagio-error-directive>
+
   <div class="form-group">
     <label for="card_limit">Amount:</label>
-    <input type="text" class="form-control" id="payment_amount" ng-model='vm.amount' ui-money-mask>
+    <input type="text" class="form-control" id="payment_amount" ng-model='vm.payment_amount' ui-money-mask>
   </div>
 
   <button ng-click="vm.submitPayment()">Submit</button>

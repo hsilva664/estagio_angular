@@ -72,8 +72,11 @@ var module = angular.module('myApp', [
 
   module.filter('cardNumber', function() {
     return function(input) {
-        if(typeof(input)!='string') {
+        if(typeof(input)=='number') {
             input=input.toString();
+        }
+        if(typeof(input)=='undefined') {
+            return "";
         }
         var output="";
         for(var i=0;i<input.length;i++) {
